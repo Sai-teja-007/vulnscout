@@ -1,6 +1,11 @@
-streamlit
 langchain
 langchain-groq
-langchain-core
+langchain-ollama
+langchain-community
+streamlit
+chromadb
 duckduckgo-search
+httpx
+python-dotenv
+tavily-python
 reportlab
