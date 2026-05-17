@@ -1,11 +1,8 @@
-langchain
-langchain-groq
-langchain-ollama
-langchain-community
 streamlit
-chromadb
-duckduckgo-search
-httpx
-python-dotenv
+langchain==0.3.25
+langchain-core==0.3.59
+langchain-groq
+langchain-community
 tavily-python
+python-dotenv
 reportlab
