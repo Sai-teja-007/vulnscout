@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+from python_dotenv import load_dotenv
 from langchain_core.tools import tool
 from tavily import TavilyClient
 load_dotenv()  # reads keys from .env file
