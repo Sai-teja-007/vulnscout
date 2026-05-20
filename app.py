@@ -23,7 +23,7 @@ with st.sidebar:
     st.caption("Your local AI security analyst")
     st.divider()
     st.header("🛠️ Active Tools")
-    st.success("✅ Web Search (DuckDuckGo)")
+    st.success("✅ Web Search (Tavily)")
     st.success("✅ Code Runner (Python sandbox)")
     st.success("✅ File Reader")
     st.success("✅ File Writer")
@@ -32,7 +32,7 @@ with st.sidebar:
     st.success("✅ MITRE ATT&CK Mapper")
     st.divider()
     st.header("📂 Upload a file")
-    uploaded = st.file_uploader("Upload .txt, .py, .log, .csv", type=["txt","py","log","csv","md"])
+    uploaded = st.file_uploader("Upload .txt, .py, .log, .csv", type=["txt","py","log","csv","md"], key="file_uploader_main")
     if uploaded:
         save_path = os.path.join("uploads", uploaded.name)
         os.makedirs("uploads", exist_ok=True)
@@ -56,10 +56,10 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 EXAMPLES = [
-    "Search for CVE-2024-3094, score its severity, map it to MITRE, and generate a PDF report",
-    "Search for the latest critical CVE and create a professional PDF report with findings",
-    "Find threats related to phishing, score them, and map to MITRE ATT&CK techniques",
-    "Analyze a security threat and provide MITRE technique mappings with recommendations",
+    "Search for CVE-2024-3094 and explain how dangerous it is",
+    "Use code_runner to write a Python port scanner for localhost",
+    "Search for biggest cybersecurity attacks in 2025",
+    "Search for CVE-2024-3094 and generate a PDF report",
 ]
 
 st.markdown("**💡 Try an example task:**")
@@ -81,13 +81,12 @@ if user_input:
     with st.chat_message("assistant"):
         with st.status("🧠 VulnScout is thinking...", expanded=True) as status:
             try:
-                # Simple agent invocation without callbacks
                 result = agent.invoke({"input": user_input})
                 final_answer = result.get("output", "Agent did not return an answer.")
                 status.update(label="✅ Done!", state="complete")
-
             except Exception as e:
                 final_answer = f"Something went wrong:\n\n```\n{str(e)}\n```"
+                status.update(label="❌ Error", state="error")
 
         st.markdown(final_answer)
 
