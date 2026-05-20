@@ -10,7 +10,7 @@ def web_search(query: str) -> str:
     Input: a plain search query string.
     """
     try:
-        client = TavilyClient(api_key="your_tavily_key_here")
+        client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
         response = client.search(query, max_results=4)
         results = []
         for r in response["results"]:
